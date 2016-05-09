@@ -11,6 +11,6 @@ class MainController {
 	
 	@Get("/inicio")
 	def inicio(){
-		
+		ok("")
 	}
 }
