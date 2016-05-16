@@ -6,12 +6,11 @@ import org.uqbar.xtrest.api.XTRest
 
 @Controller
 class MainController {
-
+	
 	@Get("/inicio")
 	def inicio(){
-		
-		response.contentType = "text/html"
-		ok("<h style='font-family:courier; font-size:35px;'>Acá Hay Gato Encerrado...</h>")
+
+		ok("Acá Hay Gato Encerrado...")
 	}
 	
 	def static void main(String[] args) {
