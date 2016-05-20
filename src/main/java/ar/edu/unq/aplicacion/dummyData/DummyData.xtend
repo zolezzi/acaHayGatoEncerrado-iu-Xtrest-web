@@ -15,26 +15,57 @@ class DummyData {
 	
 	new(){
 		laberintos = new ArrayList<Laberinto>
-		crearLaberintoDummy
+		crearDummyData
 	}
 	
-	def crearLaberintoDummy(){
+	def crearDummyData(){
+		
+		crearLaberintoNostromo
+		crearLaberintoCasaEmbrujada
+		crearLaberintoUNQui
+	}
+	
+	def crearLaberintoNostromo(){
+
 		laberintos.add(new Laberinto => [
 			
 			nombre = "Nostromo"
+
 			agregarHabitacion(crearHabitacion("Baño"))
-			habitacionInicial = habitaciones.get(0)
-			
 			agregarHabitacion(crearHabitacion("Comedor"))
-			habitaciones.get(0).crearAccionDeIrAOtraHabitacion(habitaciones.get(1))
-//			habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(0))
-			
 			agregarHabitacion(crearHabitacion("Puerto"))
-			habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(2))
-//			habitaciones.get(2).crearAccionDeIrAOtraHabitacion(habitaciones.get(1))
-			
 			agregarHabitacion(crearHabitacion("Cápsula de Escape"))
-			habitacionFinal = habitaciones.get(3)
+
+			//DEFINIMOS HABITACIONES INICIAL Y FINAL
+				habitacionInicial = habitaciones.get(0)
+				//Baño es la habitacionInicial
+				habitacionFinal = habitaciones.get(3)
+				//Cápsula de Escape es la habitacionFinal
+
+			//CREAMOS ACCIONES DE IR A OTRA HABITACION
+				habitaciones.get(0).crearAccionDeIrAOtraHabitacion(habitaciones.get(1))
+				//del Baño puedo ir al Comedor
+				habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(0))
+				habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(2))
+				//del Comedor puedo ir al Baño y al Puerto
+				habitaciones.get(2).crearAccionDeIrAOtraHabitacion(habitaciones.get(1))
+				//del Puerto puedo ir al Comedor
+		])
+	}
+	
+	def crearLaberintoCasaEmbrujada(){
+
+		laberintos.add(new Laberinto => [
+			
+			nombre = "Casa Embrujada"
+		])
+	}
+	
+	def crearLaberintoUNQui(){
+
+		laberintos.add(new Laberinto => [
+			
+			nombre = "UNQui"
 		])
 	}
 
