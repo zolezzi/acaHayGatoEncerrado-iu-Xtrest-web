@@ -11,12 +11,12 @@ import ar.edu.unq.aplicacion.dummyData.DummyData
 class MainController {
 	
 	extension JSONUtils = new JSONUtils
+	val dummyData = new DummyData
 	
 	@Get("/laberintosDisponibles")
 	def Result laberintosDisponibles(){
 
-		val laberintos = new DummyData().laberintos
-		ok(laberintos.toJson)
+		ok(dummyData.laberintos.toJson)
 	}
 	
 	def static void main(String[] args) {
