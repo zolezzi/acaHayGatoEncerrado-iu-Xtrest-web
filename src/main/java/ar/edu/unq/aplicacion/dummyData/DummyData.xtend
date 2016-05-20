@@ -1,12 +1,12 @@
 package ar.edu.unq.aplicacion.dummyData
 
 import org.uqbar.commons.utils.Observable
-import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.acahaygatoencerrado.dominio.Laberinto
 import java.util.List
 import java.util.ArrayList
 import ar.edu.unq.acahaygatoencerrado.dominio.Habitacion
 import ar.edu.unq.acahaygatoencerrado.dominio.Item
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 @Observable
@@ -16,11 +16,32 @@ class DummyData {
 	
 	new(){
 		laberintos = new ArrayList<Laberinto>
+		
 		crearLaberintoNostromo
 		crearLaberintoCasaEmbrujada
 		crearLaberintoUNQui
+		
+		habilitarTodosLosLaberintos
 	}
-	
+
+	def habilitarTodosLosLaberintos(){
+
+		for(laberinto : laberintos){
+			laberinto.disponibilidad = true
+		}
+	}
+
+	def laberintosDisponibles(){
+		
+		var List<Laberinto> laberintosDisponibles = new ArrayList<Laberinto>
+		for(laberinto : laberintos){
+			if(laberinto.disponibilidad){
+				laberintosDisponibles.add(laberinto)
+			}
+		}
+		laberintosDisponibles
+	}
+
 	def crearLaberintoNostromo(){
 
 		laberintos.add(new Laberinto => [
@@ -81,7 +102,11 @@ class DummyData {
 			agregarHabitacion(crearHabitacion("Patio"))
 			
 			//DEFINIMOS HABITACIONES INICIAL Y FINAL
-		
+				habitacionInicial = habitaciones.get(0)
+				//Calabozo es la habitacionInicial
+				habitacionFinal = habitaciones.get(3)
+				//Patio es la habitacionFinal
+
 			//CREAMOS ACCIONES DE IR A OTRA HABITACION
 		
 			//CREAMOS ACCIONES DE AGARRAR UN ITEM
@@ -100,11 +125,15 @@ class DummyData {
 			nombre = "UNQui"
 			
 			agregarHabitacion(crearHabitacion("API"))
-			agregarHabitacion(crearHabitacion("Pasillo"))
+			agregarHabitacion(crearHabitacion("Ascensor"))
 			agregarHabitacion(crearHabitacion("Aula 60"))
 			agregarHabitacion(crearHabitacion("Calle"))
 
 			//DEFINIMOS HABITACIONES INICIAL Y FINAL
+				habitacionInicial = habitaciones.get(0)
+				//API es la habitacionInicial
+				habitacionFinal = habitaciones.get(3)
+				//Calle es la habitacionFinal
 		
 			//CREAMOS ACCIONES DE IR A OTRA HABITACION
 		

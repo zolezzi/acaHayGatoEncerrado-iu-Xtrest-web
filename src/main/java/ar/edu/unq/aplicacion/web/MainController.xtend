@@ -13,12 +13,18 @@ class MainController {
 	extension JSONUtils = new JSONUtils
 	val dummyData = new DummyData
 	
+	@Get("/laberintos")
+	def Result laberintos(){
+		
+		ok(dummyData.laberintos.toJson)
+	}
+
 	@Get("/laberintosDisponibles")
 	def Result laberintosDisponibles(){
 
-		ok(dummyData.laberintos.toJson)
+		ok(dummyData.laberintosDisponibles.toJson)
 	}
-	
+
 	def static void main(String[] args) {
 		XTRest.start(MainController, 9777)
 	}
