@@ -69,6 +69,7 @@ class DummyData {
 				habitaciones.get(0).crearAccionDeAgarrarUnElemento("Jabón")
 				//en el Baño puedo agarrar Jabón
 				habitaciones.get(1).crearAccionDeAgarrarUnElemento("Servilleta con contraseña escrita")
+				//en el Comedor puedo agarrar Servilleta con contraseña escrita
 
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA AGARRAR OTRO ITEM
 				habitaciones.get(0).crearAccionDeUsarUnItem(
@@ -150,5 +151,9 @@ class DummyData {
 		new Habitacion => [
 			nombre = nombreHabitacion
 		]
+	}
+	
+	def jugador() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
 	}
 }
