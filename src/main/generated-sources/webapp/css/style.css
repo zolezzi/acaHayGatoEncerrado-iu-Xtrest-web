@@ -24,19 +24,20 @@ ul#menu {
 ul#menu li a {
     padding: 14px 10px;
 }
+
+a {color:white; background-color:transparent; text-decoration:none}
+
 ul#menu li a:hover {
     background-color: #202020;
 }
 ul#menu li a:active {
     background-color: black;
-    color: yellow;
 }
 #section {
     background-color:white;
     color:black;
     padding:10px;
     border:none;
-    text-align:center;
     position:absolute;
     top:140px;
     bottom:47px;

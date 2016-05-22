@@ -47,7 +47,8 @@ var laberintos = [{"nombre":"Nostromo",
 			"jugadorActual":null,
 			"habitacionInicial":{"nombre":"API"},
 			"habitacionFinal":{"nombre":"Calle"},
-			"itemsAgarrables":[]}]
+			"itemsAgarrables":[]}
+	]
 
 obtenerLaberintosDisponibles(laberintos);
 
@@ -56,7 +57,9 @@ function obtenerLaberintosDisponibles() {
 	var i;
 	for(i = 0; i < laberintos.length; i++) {
 		if(laberintos[i].disponibilidad){
-			out +=	'<li><a><img src="img/' + laberintos[i].nombre + '.jpg" alt="' + laberintos[i].nombre + 			'"style="float:left;width:44px;height:44px;">' + laberintos[i].nombre + '</a></li>'
+			out +=	'<li><a href="laberintoSeleccionado.htm" target="panelCentral"><img src="img/' +
+				 laberintos[i].nombre + '.jpg" alt="' + laberintos[i].nombre +
+				'"style="float:left;width:44px;height:44px;">' + laberintos[i].nombre + '</a></li>'
 		}
 	}
     document.getElementById("menu").innerHTML = out;
