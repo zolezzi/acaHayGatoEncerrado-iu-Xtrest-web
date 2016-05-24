@@ -8,7 +8,7 @@ import org.uqbar.xtrest.api.Result
 import ar.edu.unq.aplicacion.dummyData.DummyData
 
 @Controller
-class MainController {
+class LaberintosController {
 	
 	extension JSONUtils = new JSONUtils
 	val dummyData = new DummyData
@@ -26,6 +26,6 @@ class MainController {
 	}
 
 	def static void main(String[] args) {
-		XTRest.start(MainController, 9777)
+		XTRest.start(LaberintosController, 9777)
 	}
 }
