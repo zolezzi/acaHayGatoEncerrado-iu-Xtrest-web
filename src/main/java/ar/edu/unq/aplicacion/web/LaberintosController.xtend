@@ -16,13 +16,13 @@ class LaberintosController {
 	@Get("/laberintos")
 	def Result laberintos(){
 		
-		ok(dummyData.laberintos.toJson)
+		ok(dummyData.getLaberintos.toJson)
 	}
-
-	@Get("/laberintosDisponibles")
-	def Result laberintosDisponibles(){
-
-		ok(dummyData.laberintosDisponibles.toJson)
+	
+	@Get("/jugador")
+	def Result jugador(){
+		
+		ok(dummyData.getJugador.toJson)
 	}
 
 	def static void main(String[] args) {

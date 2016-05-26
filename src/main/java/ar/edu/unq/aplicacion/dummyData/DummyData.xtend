@@ -7,14 +7,21 @@ import java.util.ArrayList
 import ar.edu.unq.acahaygatoencerrado.dominio.Habitacion
 import ar.edu.unq.acahaygatoencerrado.dominio.Item
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.acahaygatoencerrado.dominio.Jugador
 
 @Accessors
 @Observable
 class DummyData {
 	
 	List<Laberinto> laberintos
-	
+	Jugador jugador
+
 	new(){
+
+		jugador = new Jugador => [
+			it.nombre = "Pepe Default"
+		]
+		
 		laberintos = new ArrayList<Laberinto>
 		
 		crearLaberintoNostromo
@@ -22,6 +29,8 @@ class DummyData {
 		crearLaberintoUNQui
 		
 		habilitarTodosLosLaberintos
+		
+		crearLaberintoFalso
 	}
 
 	def habilitarTodosLosLaberintos(){
@@ -29,17 +38,6 @@ class DummyData {
 		for(laberinto : laberintos){
 			laberinto.disponibilidad = true
 		}
-	}
-
-	def laberintosDisponibles(){
-		
-		var List<Laberinto> laberintosDisponibles = new ArrayList<Laberinto>
-		for(laberinto : laberintos){
-			if(laberinto.disponibilidad){
-				laberintosDisponibles.add(laberinto)
-			}
-		}
-		laberintosDisponibles
 	}
 
 	def crearLaberintoNostromo(){
@@ -145,6 +143,10 @@ class DummyData {
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA AGARRAR OTRO ITEM
 		
 		])
+	}
+
+	def crearLaberintoFalso(){
+		laberintos.add(new Laberinto => [nombre="Yo no debo estar acá"])
 	}
 
 	def crearHabitacion(String nombreHabitacion) {
