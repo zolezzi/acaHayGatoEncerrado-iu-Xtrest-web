@@ -46,16 +46,16 @@ class DummyData {
 			
 			nombre = "Nostromo"
 
-			agregarHabitacion(crearHabitacion("Baño"))
+			agregarHabitacion(crearHabitacion("Vestuario"))
 			agregarHabitacion(crearHabitacion("Comedor"))
 			agregarHabitacion(crearHabitacion("Puerto"))
-			agregarHabitacion(crearHabitacion("Cápsula de Escape"))
+			agregarHabitacion(crearHabitacion("Nave"))
 
 			//DEFINIMOS HABITACIONES INICIAL Y FINAL
 				habitacionInicial = habitaciones.get(0)
-				//Baño es la habitacionInicial
+				//Vestuario es la habitacionInicial
 				habitacionFinal = habitaciones.get(3)
-				//Cápsula de Escape es la habitacionFinal
+				//Nave es la habitacionFinal
 
 			//CREAMOS ACCIONES DE IR A OTRA HABITACION
 				habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(2))
@@ -64,16 +64,16 @@ class DummyData {
 				//del Puerto puedo ir al Comedor
 				
 			//CREAMOS ACCIONES DE AGARRAR UN ITEM
-				habitaciones.get(0).crearAccionDeAgarrarUnElemento("Jabón")
-				//en el Baño puedo agarrar Jabón
-				habitaciones.get(1).crearAccionDeAgarrarUnElemento("Servilleta con contraseña escrita")
-				//en el Comedor puedo agarrar Servilleta con contraseña escrita
+				habitaciones.get(0).crearAccionDeAgarrarUnElemento("Ropa")
+				//en el Vestuario puedo agarrar Ropa
+				habitaciones.get(1).crearAccionDeAgarrarUnElemento("Servilleta con password escrita")
+				//en el Comedor puedo agarrar Servilleta con password escrita
 
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA AGARRAR OTRO ITEM
 				habitaciones.get(0).crearAccionDeUsarUnItem(
 					habitaciones.get(0).acciones.get(0).itemAgarrable.get(0),
 					new Item => [ nombre = "Manos limpias" ])
-					//en el Baño puedo usar Jabón para obtener Manos limpias
+					//en el Vestuario puedo usar Ropa para obtener Manos limpias
 
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA IR A OTRA HABITACION
 				habitaciones.get(0).crearAccionDeUsarUnItem(
@@ -93,18 +93,19 @@ class DummyData {
 
 		laberintos.add(new Laberinto => [
 			
-			nombre = "Casa Embrujada"
+			nombre = "Carcel"
 			
 			agregarHabitacion(crearHabitacion("Calabozo"))
 			agregarHabitacion(crearHabitacion("Sala de Tortura"))
-			agregarHabitacion(crearHabitacion("Living-Comedor"))
+			agregarHabitacion(crearHabitacion("Comedor"))
 			agregarHabitacion(crearHabitacion("Patio"))
+			agregarHabitacion(crearHabitacion("Calle"))
 			
 			//DEFINIMOS HABITACIONES INICIAL Y FINAL
 				habitacionInicial = habitaciones.get(0)
 				//Calabozo es la habitacionInicial
-				habitacionFinal = habitaciones.get(3)
-				//Patio es la habitacionFinal
+				habitacionFinal = habitaciones.get(4)
+				//Calle es la habitacionFinal
 
 			//CREAMOS ACCIONES DE IR A OTRA HABITACION
 		
@@ -146,7 +147,7 @@ class DummyData {
 	}
 
 	def crearLaberintoFalso(){
-		laberintos.add(new Laberinto => [nombre="Yo no debo estar acá"])
+		laberintos.add(new Laberinto => [nombre="Laberinto no disponible"])
 	}
 
 	def crearHabitacion(String nombreHabitacion) {
@@ -154,8 +155,14 @@ class DummyData {
 			nombre = nombreHabitacion
 		]
 	}
-	
-	def jugador() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+
+	def getLaberinto(String nombreLaberinto) {
+		var Laberinto resultadoLaberinto = null
+		for(laberinto : laberintos){
+			if(laberinto.nombre == nombreLaberinto){
+				resultadoLaberinto = laberinto
+			}
+		}
+		resultadoLaberinto
 	}
 }
