@@ -7,16 +7,16 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	$http.get("/jugador").then(function (response) {
 		$scope.jugador = response.data;
 	});
-	
-	$scope.seleccionNula = false;
-	$scope.showSeleccionNula = function () {
-		$scope.seleccionNula = false;
-	};
+
+	$scope.laberintoSeleccionado = null;
+	$scope.seleccionNula = true;
+	$scope.hayUnLaberintoSeleccionado = false;
 
 	$http.get("/nombreLaberinto").then(function (response) {
-		$scope.laberintoSeleccionado = null;
 		$scope.seleccionarLaberinto = function() {
+			$scope.seleccionNula = false;
 			$scope.laberintoSeleccionado = response.data;
+			$scope.hayUnLaberintoSeleccionado = true;
 		}
 	});
 });
