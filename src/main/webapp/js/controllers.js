@@ -9,7 +9,7 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	});
 	
 	$scope.seleccionNula = false;
-	showSeleccionNula = function () {
+	$scope.showSeleccionNula = function () {
 		$scope.seleccionNula = false;
 	};
 
