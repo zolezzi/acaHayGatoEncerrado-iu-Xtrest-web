@@ -8,6 +8,7 @@ import ar.edu.unq.acahaygatoencerrado.dominio.Habitacion
 import ar.edu.unq.acahaygatoencerrado.dominio.Item
 import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.acahaygatoencerrado.dominio.Jugador
+import java.util.NoSuchElementException
 
 @Accessors
 @Observable
@@ -159,7 +160,7 @@ class DummyData {
 
 	def crearLaberintoFalso(){
 		laberintos.add(new Laberinto => [
-			nombre="Laberinto no disponible"
+			nombre="FALSO"
 			descripcion="Este laberinto no debe aparecer"
 		])
 	}
@@ -169,14 +170,11 @@ class DummyData {
 			nombre = nombreHabitacion
 		]
 	}
-
-	def getLaberinto(String nombreLaberinto) {
-		var Laberinto resultadoLaberinto
-		for(laberinto : laberintos){
-			if(laberinto.nombre == nombreLaberinto){
-				resultadoLaberinto = laberinto
-			}
+	
+	def Laberinto getLaberinto(String nombreLaberinto) {
+		val laberinto = this.laberintos.findFirst[it.nombre == nombreLaberinto]
+		if(laberinto == null) {
+			throw new NoSuchElementException('''No hay ningún laberinto que se llame «nombreLaberinto»''')
 		}
-		resultadoLaberinto
 	}
 }

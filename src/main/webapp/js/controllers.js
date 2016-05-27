@@ -11,13 +11,11 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	$scope.laberintoSeleccionado = null;
 	$scope.seleccionNula = true;
 	$scope.hayUnLaberintoSeleccionado = false;
-	$scope.seEstaJugandoElLaberintoSeleccionado = false;
+	$scope.seEstaJugandoEnElLaberintoSeleccionado = false;
 
-	$http.get("/nombreLaberinto").then(function (response) {
-		$scope.seleccionarLaberinto = function() {
-			$scope.seleccionNula = false;
-			$scope.laberintoSeleccionado = response.data;
-			$scope.hayUnLaberintoSeleccionado = true;
-		}
-	});
+	$scope.seleccionarLaberinto = function(laberinto) {
+		$scope.laberintoSeleccionado = laberinto;
+		$scope.seleccionNula = false;
+		$scope.hayUnLaberintoSeleccionado = true;
+	};
 });
