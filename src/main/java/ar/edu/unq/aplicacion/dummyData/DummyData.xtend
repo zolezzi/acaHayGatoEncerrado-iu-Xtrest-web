@@ -45,17 +45,21 @@ class DummyData {
 		laberintos.add(new Laberinto => [
 			
 			nombre = "Nostromo"
+			descripcion = "Estabas ocupado haciendo lo segundo y, como no se escuchan los gritos en el " +
+			"espacio, nadie escuchó tus gritos pidiendo que alguien te alcance un rollo de papel higiénico. " +
+			"Te las arreglaste pegándote una ducha y no te diste cuenta de que Alien mató a tus amigos. " +
+			"Ahora, procurando no resbalarte, vas a tener que tratar de escapar de esta nave."
 
 			agregarHabitacion(crearHabitacion("Vestuario"))
 			agregarHabitacion(crearHabitacion("Comedor"))
 			agregarHabitacion(crearHabitacion("Puerto"))
-			agregarHabitacion(crearHabitacion("Nave"))
+			agregarHabitacion(crearHabitacion("Nave Auxiliar"))
 
 			//DEFINIMOS HABITACIONES INICIAL Y FINAL
 				habitacionInicial = habitaciones.get(0)
 				//Vestuario es la habitacionInicial
 				habitacionFinal = habitaciones.get(3)
-				//Nave es la habitacionFinal
+				//Nave Auxiliar es la habitacionFinal
 
 			//CREAMOS ACCIONES DE IR A OTRA HABITACION
 				habitaciones.get(1).crearAccionDeIrAOtraHabitacion(habitaciones.get(2))
@@ -72,19 +76,19 @@ class DummyData {
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA AGARRAR OTRO ITEM
 				habitaciones.get(0).crearAccionDeUsarUnItem(
 					habitaciones.get(0).acciones.get(0).itemAgarrable.get(0),
-					new Item => [ nombre = "Manos limpias" ])
-					//en el Vestuario puedo usar Ropa para obtener Manos limpias
+					new Item => [ nombre = "Descencia" ])
+					//en el Vestuario puedo usar Ropa para obtener Descencia
 
 			//CREAMOS ACCIONES DE USAR UN ITEM PARA IR A OTRA HABITACION
 				habitaciones.get(0).crearAccionDeUsarUnItem(
 					habitaciones.get(0).acciones.get(1).itemAgarrable.get(0),
 					habitaciones.get(1))
-					//en el Baño puedo usar las Manos limpias para ir al Comedor
+					//en el Baño puedo usar Descencia para ir al Comedor
 				habitaciones.get(2).crearAccionDeUsarUnItem(
 					habitaciones.get(1).acciones.get(1).itemAgarrable.get(0),
 					habitaciones.get(3))
-					//en el Puerto puedo usar la Servilleta con contraseña escrita
-					//para ir a la Cápsula de Escape
+					//en el Puerto puedo usar la Servilleta con password escrita
+					//para ir a la Nave Auxiliar
 
 		])
 	}
@@ -94,6 +98,10 @@ class DummyData {
 		laberintos.add(new Laberinto => [
 			
 			nombre = "Carcel"
+			descripcion = "Por enamorarte de la hija del comisario terminaste tras las rejas. " +
+			"Pero sos una persona inteligente y estuviste preparando un excelente plan para escapar. " +
+			"Lástima que no tenés buena memoria y ahora no te acordás qué cosas tenés que usar para " +
+			"poder salir... Es que estar enamorado no te deja pensar bien."
 			
 			agregarHabitacion(crearHabitacion("Calabozo"))
 			agregarHabitacion(crearHabitacion("Sala de Tortura"))
@@ -123,6 +131,9 @@ class DummyData {
 		laberintos.add(new Laberinto => [
 			
 			nombre = "UNQui"
+			descripcion = "Estás estudiando para ser un gran programador, pero tenés un maquiavélico parcial" +
+			" dentro de unas horas. Estás en el API, con tu PC y todos los test te siguen fallando. " +
+			"Tenés que prepararte, rendirlo bien y salir orgulloso de tu sapienza. ¿Vas a llegar? "
 			
 			agregarHabitacion(crearHabitacion("API"))
 			agregarHabitacion(crearHabitacion("Ascensor"))
@@ -147,7 +158,10 @@ class DummyData {
 	}
 
 	def crearLaberintoFalso(){
-		laberintos.add(new Laberinto => [nombre="Laberinto no disponible"])
+		laberintos.add(new Laberinto => [
+			nombre="Laberinto no disponible"
+			descripcion="Este laberinto no debe aparecer"
+		])
 	}
 
 	def crearHabitacion(String nombreHabitacion) {
@@ -157,7 +171,7 @@ class DummyData {
 	}
 
 	def getLaberinto(String nombreLaberinto) {
-		var Laberinto resultadoLaberinto = null
+		var Laberinto resultadoLaberinto
 		for(laberinto : laberintos){
 			if(laberinto.nombre == nombreLaberinto){
 				resultadoLaberinto = laberinto

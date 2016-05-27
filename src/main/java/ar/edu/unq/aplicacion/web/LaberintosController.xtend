@@ -1,12 +1,12 @@
 package ar.edu.unq.aplicacion.web
 
+import ar.edu.unq.aplicacion.dummyData.DummyData
+import org.uqbar.xtrest.api.Result
+import org.uqbar.xtrest.api.XTRest
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
-import org.uqbar.xtrest.api.XTRest
 import org.uqbar.xtrest.json.JSONUtils
-import org.uqbar.xtrest.api.Result
-import ar.edu.unq.aplicacion.dummyData.DummyData
-import ar.edu.unq.acahaygatoencerrado.dominio.Laberinto
+import java.util.NoSuchElementException
 
 @Controller
 class LaberintosController {
@@ -27,11 +27,13 @@ class LaberintosController {
 	}
 	
 	@Get("/:nombreLaberinto")
-	def Result seleccionarLaberinto(){
-		
-		var Laberinto laberintoSeleccionado = dummyData.getLaberinto(nombreLaberinto)
-		
-		ok(laberintoSeleccionado.toJson)
+	def Result seleccionarLaberinto(String nombre){
+		try{
+			response.contentType = "application/json"
+			ok(dummyData.getLaberinto(nombreLaberinto).toJson)
+		} catch (NoSuchElementException nse) {
+			notFound('''No se encontró ningún laberinto que se llame «nombreLaberinto»''')
+		}
 	}
 
 	def static void main(String[] args) {

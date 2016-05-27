@@ -11,6 +11,7 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	$scope.laberintoSeleccionado = null;
 	$scope.seleccionNula = true;
 	$scope.hayUnLaberintoSeleccionado = false;
+	$scope.seEstaJugandoElLaberintoSeleccionado = false;
 
 	$http.get("/nombreLaberinto").then(function (response) {
 		$scope.seleccionarLaberinto = function() {

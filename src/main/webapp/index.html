@@ -22,10 +22,10 @@
 
 <div id="nav">
 	<ul id="menu">
-		<ul style="padding-left:0px;">
+		<ul style="padding-left:0px;list-style-type:none">
 		<li ng-repeat="laberinto in laberintos | filter: disponibilidad = true ">
-			<a alt={{laberinto.nombre}} ng-click="seleccionarLaberinto()">
-			<img src="img/{{laberinto.nombre}}.jpg" style="float:left;width:44px;height:44px;">
+			<a alt={{laberinto.nombre}} ng-click=seleccionarLaberinto(laberinto.nombre)>
+			<img src=img/{{laberinto.nombre}}.jpg style="float:left;width:44px;height:44px;">
 			{{laberinto.nombre}}</a>
 		</li>
 		</ul>
@@ -39,8 +39,10 @@
 	</div>
 	
 	<div ng-show="hayUnLaberintoSeleccionado">
-		<h2>Hay un Laberinto Seleccionado</h2>
-		<p>Ahora hay que hacerlo aparecer acá</p>
+		<img src=img/{{laberintoSeleccionado.nombre}}.jpg alt={{laberintoSeleccionado.nombre}} style="float:left;width:300px;height:300px;">
+		<h2>{{laberintoSeleccionado.nombre}}</h2>
+		<p>{{laberintoSeleccionado.descripcion}}</p>
+		<button style="width:300px;">Jugar en {{laberintoSeleccionado.nombre}}</button>
 	</div>
 </div>
 
