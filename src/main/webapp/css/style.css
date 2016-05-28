@@ -43,6 +43,7 @@ ul#menu li a:active {
     bottom:47px;
     left:235px;
     right:9px;
+    overflow: auto;
 }
 #footer {
     clear:both;

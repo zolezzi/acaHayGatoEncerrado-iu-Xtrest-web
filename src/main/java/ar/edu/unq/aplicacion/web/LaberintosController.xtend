@@ -1,11 +1,11 @@
 package ar.edu.unq.aplicacion.web
 
-import ar.edu.unq.aplicacion.dummyData.DummyData
 import org.uqbar.xtrest.api.Result
 import org.uqbar.xtrest.api.XTRest
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.json.JSONUtils
+import ar.edu.unq.aplicacion.dummyData.DummyData
 
 @Controller
 class LaberintosController {
