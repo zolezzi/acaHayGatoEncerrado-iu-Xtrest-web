@@ -13,7 +13,6 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	$scope.seEstaJugandoEnElLaberintoSeleccionado = false;
 
 	$scope.laberintoSeleccionado = null;
-	$scope.habitacionActual = null;
 
 	$scope.seleccionarLaberinto = function(laberinto) {
 		$scope.laberintoSeleccionado = laberinto;
@@ -24,8 +23,8 @@ app.controller('JuegoCtrl', function($scope, $http) {
 	$scope.jugarLaberinto = function() {
 		$scope.hayUnLaberintoSeleccionado = false;
 		$scope.seEstaJugandoEnElLaberintoSeleccionado = true;
-		$scope.laberintoSeleccionado.disponibilidad = false;
-		$scope.laberintoSeleccionado.jugadorActual = $scope.jugador;
-		$scope.laberintoSeleccionado.jugadorActual.habitacionActual = $scope.laberintoSeleccionado.habitacionInicial;
+		$http.get("/jugar/" + $scope.laberintoSeleccionado.id).then(function(response){
+			$scope.jugador = response.data;
+		})
 	};
 });

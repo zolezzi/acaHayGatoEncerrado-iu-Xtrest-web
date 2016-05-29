@@ -1,14 +1,16 @@
 package ar.edu.unq.aplicacion.web
 
+import ar.edu.unq.acahaygatoencerrado.dominio.Laberinto
+import ar.edu.unq.aplicacion.dummyData.DummyData
 import org.uqbar.xtrest.api.Result
 import org.uqbar.xtrest.api.XTRest
 import org.uqbar.xtrest.api.annotation.Controller
 import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.json.JSONUtils
-import ar.edu.unq.aplicacion.dummyData.DummyData
+import org.uqbar.commons.model.UserException
 
 @Controller
-class LaberintosController {
+class JuegoController {
 	
 	extension JSONUtils = new JSONUtils
 	var dummyData = new DummyData
@@ -24,8 +26,21 @@ class LaberintosController {
 		
 		ok(dummyData.getJugador.toJson)
 	}
+	
+	@Get("/jugar/:idLaberinto")
+	def Result jugarLaberinto(){
+		val iId = Integer.valueOf(idLaberinto)
+		try {
+			response.contentType = "application/json"
+			dummyData.jugarLaberinto(iId)
+			ok(dummyData.getJugador.toJson)
+		}
+		catch (UserException e) {
+			notFound("No existe laberinto con id '" + idLaberinto + "'");
+		}
+	}
 
 	def static void main(String[] args) {
-		XTRest.start(LaberintosController, 9777)
+		XTRest.start(JuegoController, 9777)
 	}
 }

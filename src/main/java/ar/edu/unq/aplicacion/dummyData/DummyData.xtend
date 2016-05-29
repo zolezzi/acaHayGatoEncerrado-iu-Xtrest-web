@@ -14,10 +14,6 @@ class DummyData {
 	Jugador jugador
 
 	new(){
-
-		jugador = new Jugador => [
-			it.nombre = "Pepe Default"
-		]
 		
 		creadorDeLaberintos = new CreadorDeLaberintos
 
@@ -30,6 +26,10 @@ class DummyData {
 		creadorDeLaberintos.agregarLaberinto(getLaberintoIncompleto)
 
 		servidor.habilitarLaberintosQueEstenEnCondicionesDeSerJugados
+
+		jugador = new Jugador => [
+			it.nombre = "Pepe Default"
+		]
 	}
 
 	def getLaberintos(){
@@ -38,6 +38,10 @@ class DummyData {
 	
 	def getJugador(){
 		jugador
+	}
+	
+	def jugarLaberinto(Integer idLaberinto) {
+		jugador.jugarLaberinto(servidor.getLaberinto(idLaberinto))
 	}
 
 	def getLaberintoNostromo(){
@@ -199,5 +203,5 @@ class DummyData {
 		new Habitacion => [
 			nombre = nombreHabitacion
 		]
-	}	
+	}
 }
