@@ -73,24 +73,6 @@ ul#menu li a:active {
     position:absolute;
     padding-left:410px;
 }
-#jugando_column00 {
-    background-color:red;
-    position:absolute;
-    width:337px;
-    height:337px;
-    top:350px;
-    left:10px;
-}
-#jugando_column01 {
-    background-color:green;
-    position:absolute;
-    top:150px;
-}
-#jugando_column02 {
-    background-color:blue;
-    position:absolute;
-    top:150px;
-}
 #footer {
     clear:both;
     text-align:center;
