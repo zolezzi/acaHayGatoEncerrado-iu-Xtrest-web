@@ -21,51 +21,45 @@ class JuegoController {
 		ok(juegoAppModel.getLaberintos.toJson)
 	}
 	
-	@Get("/jugador/:idJugador")
+	@Get("/jugador")
 	def Result jugador(){
-		val id = Integer.valueOf(idJugador)
 		
-		ok(juegoAppModel.getJugador(id).toJson)
+		ok(juegoAppModel.getJugador().toJson)
 	}
 	
-	@Get("/jugar/:idLaberinto/:idJugador")
+	@Get("/jugar/:idLaberinto")
 	def Result jugarLaberinto(){
 		val idLab = Integer.valueOf(idLaberinto)
-		val idJug = Integer.valueOf(idJugador)
 		try {
 			response.contentType = "application/json"
-			juegoAppModel.jugarLaberinto(idLab,iIdJug)
-			ok(juegoAppModel.getJugador(idJug).toJson)
+			juegoAppModel.jugarLaberinto(idLab)
+			ok(juegoAppModel.getJugador().toJson)
 		}
 		catch (UserException e) {
 			notFound("No existe laberinto con id '" + idLaberinto + "'");
 		}
 	}
 	
-	@Get("/hacer/:idAccion/:idJugador")
+	@Get("/hacer/:idAccion")
 	def Result hacerAccion(){
 		val idAcc = Integer.valueOf(idAccion)
-		val idJug = Integer.valueOf(idJugador)
 		try{
 			response.contentType = "application/json"
-			juegoAppModel.hacerAccion(idAcc,idJug)
-			ok(juegoAppModel.getJugador(idJug).toJson)
+			juegoAppModel.hacerAccion(idAcc)
+			ok(juegoAppModel.getJugador().toJson)
 		}
 		catch (UserException e){
 			notFound("No existe accion con id '" + idAccion + "'")
 		}
 	}
 	
-	@Get("/ganador/:idLaberinto/:idJugador")
-	def Result ganador(){
+	@Get("/ganador/:idLaberinto")
+	def Result ganar(){
 		val idLab = Integer.valueOf(idLaberinto)
-		val idJug = Integer.valueOf(idJugador)
 		
 		try{
 			response.contentType= "application/json"
-			ok((juegoAppModel.getLaberinto(idLab).getHabitacionFinal
-								==
-				juegoAppModel.getJugador(idJug).habitacionActual).toJson)
+			ok((juegoAppModel.jugadorGanoElLaberinto(idLab)).toJson)
 		} catch(UserException e){
 			notFound("No existe resultado para el laberinto con id'" + idLaberinto + "'")
 		}
@@ -77,6 +71,21 @@ class JuegoController {
 		val idJug = Integer.valueOf(idJugador)
 		juegoAppModel.getLaberinto(idLab).agregarGanador(idJug)
 		ok()
+	}
+	
+	@Get("/abandonar/:idLaberinto")
+	def Result abandonar(){
+		val idLab = Integer.valueOf(idLaberinto)
+		juegoAppModel.getLaberinto(idLab).disponibilidad = true
+		ok()
+	}
+
+	@Get("/tirar/:idItem")
+	def Result tirar(){
+		val itemId = Integer.valueOf(idItem)
+		
+		juegoAppModel.getJugador.quitar(itemId)
+		ok(juegoAppModel.getJugador().toJson)
 	}
 
 	def static void main(String[] args) {

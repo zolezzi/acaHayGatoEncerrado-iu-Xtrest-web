@@ -4,7 +4,7 @@ app.controller('JuegoCtrl', function($scope, $http) {
 		$scope.laberintos = response.data;
 	});
 
-	$http.get("/jugador/" + $scope.jugador.id).then(function (response) {
+	$http.get("/jugador").then(function (response) {
 		$scope.jugador = response.data;
 	});
 
@@ -66,6 +66,7 @@ app.controller('JuegoCtrl', function($scope, $http) {
 		$scope.hayUnLaberintoSeleccionado = false;
 		$scope.seEstaJugandoEnElLaberintoSeleccionado = false;
 		$scope.laberintoGanado = false;
+		$http.get("/abandonar/" + $scope.laberintoSeleccionado.id).then(function(response){});
 		$scope.laberintoSeleccionado = null;
 		$scope.elJugadorSolicitoAbandonar = false;
 	};
@@ -80,5 +81,12 @@ app.controller('JuegoCtrl', function($scope, $http) {
 
 	$scope.soyElItemSeleccionado = function(item) {
 		return (item == $scope.itemSeleccionado)
+	};
+
+	$scope.tirarItemSeleccionado = function() {
+		$http.get("/tirar/" + $scope.itemSeleccionado.id).then(function(response){
+			$scope.itemSeleccionado = null
+			$scope.jugador = response.data;
+		})
 	};
 });
