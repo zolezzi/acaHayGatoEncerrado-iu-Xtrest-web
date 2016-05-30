@@ -21,45 +21,82 @@
 </div>
 
 <div id="nav">
-	<ul id="menu" ng-hide="seEstaJugandoEnElLaberintoSeleccionado"><!--QUITAR EL NG-HIDE-->
+	<ul id="menu" ng-hide="seEstaJugandoEnElLaberintoSeleccionado || laberintoGanado">
 		<ul style="padding-left:0px;list-style-type:none">
 		<li ng-repeat="laberinto in laberintos | filter: disponibilidad = true ">
 			<a alt={{laberinto.nombre}} ng-click=seleccionarLaberinto(laberinto)>
 			<img src=img/{{laberinto.nombre}}.jpg style="float:left;width:44px;height:44px;">
-			{{laberinto.nombre}}</a>
+			{{laberinto.nombre}}
+			<img ng-show="soyElLaberintoSeleccionado(laberinto)"
+				 src=img/miniPointerToLeft.png alt="{{laberinto.nombre}}"
+				 style="float:right;width:44px;height:44px;"></a>
 		</li>
 		</ul>
 	</ul>
+
+	<button ng-show="seEstaJugandoEnElLaberintoSeleccionado" ng-click="solicitarAbandonarLaberinto();">Abandonar Laberinto</button>
+
+	<div ng-show="elJugadorSolicitoAbandonar">
+		<p>¿Está seguro de que quiere abandonar el laberinto {{laberintoSeleccionado.nombre}}?</p>
+		<button ng-click="abandonarLaberinto()">SI</button>
+		<button ng-click="cancelarSolicitudDeAbandonoDeLaberinto()">NO</button>
+	</div>
 </div>
 
 <div id="section">
 	<div ng-show="seleccionNula" style="text-align:center;font-family:courier;">
 		<img src="img/pointerToLeft.png" alt="Seleccioná un Laberinto" style="width:300px;height:300px;">
-		<h2>Seleccioná un Laberinto</h2>
+		<h2 alt="Seleccioná un Laberinto">Seleccioná un Laberinto</h2>
 	</div>
 	
 	<div ng-show="hayUnLaberintoSeleccionado">
-		<img src=img/{{laberintoSeleccionado.nombre}}.jpg alt={{laberintoSeleccionado.nombre}} style="float:left;width:300px;height:300px;">
-		<h2 style=padding-left:315px>{{laberintoSeleccionado.nombre}}</h2>
-		<p style=padding-left:315px>{{laberintoSeleccionado.descripcion}}</p>
-		<button ng-click=jugarLaberinto()
-		style="text-align:center;height:100px;width:300px;">Jugar en {{laberintoSeleccionado.nombre}}</button>
+		<div id="seleccionado_column00">
+			<img id="img00" src=img/{{laberintoSeleccionado.nombre}}.jpg alt={{laberintoSeleccionado.nombre}}>
+			<button id="seleccionado_buttonJugar" alt="Jugar en {{laberintoSeleccionado.nombre}}"
+				 ng-click=jugarLaberinto()>Jugar en {{laberintoSeleccionado.nombre}}</button>
+		</div>
+		<div id="seleccionado_column01">
+			<h2 alt={{laberintoSeleccionado.nombre}}>{{laberintoSeleccionado.nombre}}</h2>
+			<p alt={{laberintoSeleccionado.descripcion}}>{{laberintoSeleccionado.descripcion}}</p>
+		</div>
 	</div>
 
 	<div ng-show="seEstaJugandoEnElLaberintoSeleccionado">
-		<h1 style="text-align:center;">{{laberintoSeleccionado.nombre}}</h1>
+		<div id="encabezado00">
+			<h1 alt={{laberintoSeleccionado.nombre}}>{{laberintoSeleccionado.nombre}}</h1>
+		</div>
+		<div id="jugando_columna00">
+			<img id="img01" src=img/hab/{{jugador.habitacionActual.nombre}}.jpg
+				alt={{jugador.habitacionActual.nombre}}>
+			<h2>{{jugador.habitacionActual.nombre}}</h2>
+		</div>
+		<div id="jugando_columna01">
+			<h3 style="color:#454545">Acciones</h3>
+			<li style=list-style-type:none ng-repeat="accion in jugador.accionesDisponibles">
+				<button ng-click=hacerAccion(accion.id) style="height:50px;width:150px;"
+					 alt={{accion.nombre}}>{{accion.nombre}}</button>
+			</li>
+		</div>
+		<div id="jugando_columna02">
+			<h3 style="color:#454545">Inventario</h3>
+			<li style="list-style-type:none;" ng-repeat="item in jugador.inventario.items">
+				<p ng-click="seleccionarItem(item)" alt={{item.nombre}} >{{item.nombre}}</p>
+				<img ng-show=soyElItemSeleccionado(item)
+				src=img/miniPointerToLeft.png alt={{item.nombre}}
+				style="float:right;width:44px;height:44px;">
+			</li>
+			<button style="height:30px;width:100px;text-align:right;"
+				 alt="Tirar item" ng-click=tirarItemSeleccionado()>Tirar</button>
+		</div>
+	</div>
+
+	<div ng-show="laberintoGanado">
 		<img src=img/hab/{{jugador.habitacionActual.nombre}}.jpg
-			alt={{jugador.habitacionActual.nombre}} style="float:left;width:300px;height:300px;">
-		<h2>{{jugador.habitacionActual.nombre}}</h2>
-		<h3 style="color:#454545">Acciones</h3>
-		<li style=list-style-type:none ng-repeat="accion in jugador.habitacionActual.acciones">
-			<button style="height:50px;width:150px;" alt={{accion.nombre}}>{{accion.nombre}}</button>
-		</li>
-		<h3 style="color:#454545">Inventario</h3>
-		<li style="list-style-type:none;float:right;" ng-repeat="item in jugador.inventario">
-			<a alt={{item.nombre}}>{{item.nombre}}</a>
-		</li>
-		<button style="height:30px;width:100px;text-align:right;" alt="Tirar item">Tirar</button>
+			alt={{jugador.habitacionActual.nombre}} style="float:left;width:400px;height:400px;">
+		<h1 style="text-align:center;">¡¡¡Ganaste!!!</h1>
+		<h2 style="text-align:center;">Escapaste de {{laberintoSeleccionado.nombre}}</h2>
+		<p>{{jugador.habitacionActual.descripcion}}</p>
+		<button style="height:50px;width:200px;text-align:center;" ng-click=restablecer()>OK</button>
 	</div>
 </div>
 
