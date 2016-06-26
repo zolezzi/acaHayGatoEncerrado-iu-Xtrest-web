@@ -21,10 +21,30 @@ class JuegoController {
 		ok(juegoAppModel.getLaberintos.toJson)
 	}
 	
+	@Get("/laberintos/:idLaberinto")
+	def Result laberinto(){
+		val idLab = Integer.valueOf(idLaberinto)
+		try {
+			response.contentType = "application/json"
+			ok(juegoAppModel.getLaberinto(idLab).toJson)
+		}
+		catch (UserException e) {
+			notFound("No existe laberinto con id '" + idLaberinto + "'")
+		}
+		
+		
+	}
+	
 	@Get("/jugador")
 	def Result jugador(){
 		
 		ok(juegoAppModel.getJugador().toJson)
+	}
+	
+	@Get("/inventario")
+	def Result inventario(){
+		
+		ok(juegoAppModel.getJugador.getInventario().toJson)
 	}
 	
 	@Get("/jugar/:idLaberinto")
@@ -36,7 +56,7 @@ class JuegoController {
 			ok(juegoAppModel.getJugador().toJson)
 		}
 		catch (UserException e) {
-			notFound("No existe laberinto con id '" + idLaberinto + "'");
+			notFound("No existe laberinto con id '" + idLaberinto + "'")
 		}
 	}
 	
