@@ -97,6 +97,7 @@ class JuegoController {
 	def Result abandonar(){
 		val idLab = Integer.valueOf(idLaberinto)
 		juegoAppModel.getLaberinto(idLab).disponibilidad = true
+		juegoAppModel.getLaberinto(idLab).enJuego = false
 		ok()
 	}
 
