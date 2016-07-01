@@ -44,7 +44,7 @@ class JuegoController {
 	@Get("/inventario")
 	def Result inventario(){
 		
-		ok(juegoAppModel.getJugador.getInventario().toJson)
+		ok(juegoAppModel.getJugador.getInventario().getItems().toJson)
 	}
 	
 	@Get("/jugar/:idLaberinto")
